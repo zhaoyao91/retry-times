@@ -1,0 +1,18 @@
+{
+  "name": "retry-times",
+  "version": "1.0.0",
+  "description": "retry a task many times",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "retry"
+  ],
+  "author": "zhaoyao91 <zhaoyao91@163.com>",
+  "repository": "https://github.com/zhaoyao91/retry-times.git",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^21.2.1"
+  }
+}
