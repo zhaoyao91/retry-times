@@ -23,7 +23,7 @@ const data = await retryTimes(fetchDataTask, {times: 3})
 
 ## API
 
-#### module.retryTimes
+### module.retryTimes
 
 Retry a task at most given times.
 
@@ -34,7 +34,7 @@ Retry a task at most given times.
   - times: `Number`
   - onRetry?: `async func(err, alreadyRunCount)` - called before a retry
   
-#### module.retry
+### module.retry
 
 Retry a task.
 
