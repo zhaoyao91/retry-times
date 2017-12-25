@@ -18,21 +18,34 @@ const fetchDataTask = async () => {
   return await fetch(...)
 }
 
-const data = await retryTimes(fetchDataTask, {times: 3})
+const data = await retryTimes({times: 3}, fetchDataTask)
+
+// or
+const fetchWithRetry = retryTimes({times: 3})(fetch)
+const data = await fetchWithRetry(...).then(...).catch(...)
 ```
 
 ## API
 
 ### module.retryTimes
 
-Retry a task at most given times.
+Retry a task at most given times, or return a wrapper function.
 
-`async func(task, options) => any`
+`async func(options, task) => any`
 
-- task: `async func() => any`
 - options: `Object`
   - times: `Number`
   - onRetry?: `async func(err, alreadyRunCount)` - called before a retry
+- task: `async func() => any`
+
+
+`async func(options) => fn => fnWithRetry`
+
+- options: `Object`
+  - times: `Number`
+  - onRetry?: `async func(err, alreadyRunCount)` - called before a retry
+- fn: `async func(...args) => any`
+
   
 ### module.retry
 
