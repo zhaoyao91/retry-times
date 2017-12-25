@@ -11,7 +11,7 @@ npm i retry-times
 ## Usage
 
 ```ecmascript 6
-const {retryTimes} = require('retry-times')
+const {retryTimes, withRetry} = require('retry-times')
 
 // a task is any function without argument
 const fetchDataTask = async () => {
@@ -19,6 +19,10 @@ const fetchDataTask = async () => {
 }
 
 const data = await retryTimes(fetchDataTask, {times: 3})
+
+// or
+const fetchWithRetry = withRetry({times: 3}, fetch)
+const data = await fetchWithRetry(...).then(...).catch(...)
 ```
 
 ## API
@@ -33,6 +37,17 @@ Retry a task at most given times.
 - options: `Object`
   - times: `Number`
   - onRetry?: `async func(err, alreadyRunCount)` - called before a retry
+  
+### module.withRetry
+
+Retry a task at most given times.
+
+`async func(options, fn) => async fnWithRetry`
+
+- options: `Object`
+  - times: `Number`
+  - onRetry?: `async func(err, alreadyRunCount)` - called before a retry
+- fn: `async func(...args) => any`
   
 ### module.retry
 
