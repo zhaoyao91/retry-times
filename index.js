@@ -1,7 +1,7 @@
-const retry = require('./lib/retry')
-const retryTimes = require('./lib/retry_times')
+const buildRetry = require('./lib/build-retry')
+const buildWithRetry = require('./lib/build-with-retry')
 
 module.exports = {
-  retry,
-  retryTimes
+  buildRetry,
+  buildWithRetry
 }

@@ -5,55 +5,63 @@
 ## Installation
 
 ```
-npm i retry-times
+npm i retry-times --save
 ```
 
 ## Usage
 
+### Retry a task directly
+
 ```ecmascript 6
-const {retryTimes} = require('retry-times')
+const {buildRetry} = require('retry-times')
 
 // a task is any function without argument
-const fetchDataTask = async () => {
-  return await fetch(...)
+const task = async () => {
+  ...
 }
 
-const data = await retryTimes({times: 3}, fetchDataTask)
-
-// or
-const retry3Times = retryTimes({times: 3})
-const data = await retry3Times(fetchDataTask)
+const retry = buildRetry(3) // or buildRetry({times: 3})
+const data = await retry(task)
 ```
+
+### Wrap a task with retry
+
+```ecmascript 6
+const {buildWithRetry} = require('retry-times')
+
+// a task is any function without argument
+const task = async () => {
+  ...
+}
+
+const withRetry = buildWithRetry(3) // or buildWithRetry({times: 3})
+const taskWithRetry = withRetry(task)
+const data = taskWithRetry()
+```
+
 
 ## API
 
-### module.retryTimes
+### buildRetry
 
-Retry a task at most given times, or return a wrapper function.
+`buildRetry(options) => retry(task) => Promise`
 
-```
-func(options) => async func(task) => any
-or
-async func(options, task) => any
-```
+### buildWithRetry
 
-- options: `Object`
-  - times: `Number`
-  - onRetry?: `async func(err, alreadyRunCount)` - called before a retry
-- task: `async func() => any`
+`buildWithRetry(options) => withRetry(task) => wrappedTask() => Promise`
 
-  
-### module.retry
+### options
 
-Retry a task.
+- times - the task will run at most times
+- onRetry - `onRetry(err, runCount)`, callback when the task is about to retry 
+
+The relations of run, onRetry, and runCount are as below:
 
 ```
-func(options) => async func(task) => any
-or
-async func(options, task) => any
+run           ->             run           ->             run...
+    onRetry(err, runCount=1)     onRetry(err, runCount=2)
 ```
 
-- options: `Object`
-  - shouldRetry: `async func(err) => Boolean`
-  - onRetry?: `async func(err)` - called before a retry
-- task: `async func() => any`
+## License
+
+MIT

@@ -1,7 +1,7 @@
 {
   "name": "retry-times",
-  "version": "2.0.0",
-  "description": "retry a task many times",
+  "version": "3.0.0",
+  "description": "retry a task at most given times",
   "main": "index.js",
   "scripts": {
     "test": "jest"
