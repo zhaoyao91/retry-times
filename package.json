@@ -1,6 +1,6 @@
 {
   "name": "retry-times",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "retry a task at most given times",
   "main": "index.js",
   "scripts": {

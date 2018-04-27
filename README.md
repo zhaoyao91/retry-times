@@ -2,6 +2,10 @@
 
 > Retry a task at most given times.
 
+## Deprecation
+
+**This package is deprecated to prefer the new [retry-func](https://github.com/zhaoyao91/retry-func) package.**
+
 ## Installation
 
 ```
